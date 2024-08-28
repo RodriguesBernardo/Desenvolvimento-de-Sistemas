@@ -1,0 +1,25 @@
+body{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(54, 54, 53);
+}
+
+thead{
+  color: black;
+  font-size: 20px;
+}
+
+tbody{
+  font-size: 20px;
+}
+table{
+  border-radius: 20px;
+  border-color: white;
+  
+}
+
+label{
+  font-size: 20px;
+  ;
+}
