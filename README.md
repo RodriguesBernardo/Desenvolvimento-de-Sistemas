@@ -5,3 +5,6 @@
 
 ## 03/09/2024
 - Alterando dados em my-components - Criação de um relógio atualizado em tempo real 
+
+## 10/09/2024
+- Atividade criação de componentes

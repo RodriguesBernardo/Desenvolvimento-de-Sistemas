@@ -7,7 +7,6 @@ import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 
 function App() {
-  // Dados que serão passados como props
   const links = [
     { href: '#home', text: 'Home' },
     { href: '#news', text: 'Notícias' },
