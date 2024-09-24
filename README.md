@@ -8,3 +8,9 @@
 
 ## 10/09/2024
 - Atividade criação de componentes
+
+## 21/09/2024
+- Sabado letivo, presença para todos 
+
+## 24/09/2024
+- Formularios React
