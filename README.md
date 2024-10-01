@@ -14,7 +14,14 @@
 
 ## 24/09/2024
 - Capitulo 4 - Formularios React 
-[Formularios](./formularios/)
-[Formularios Yup](./form-yup)
-[Formularios Yup](./form-hook)
+1. [Formularios](./formularios/)
+2. [Formularios Yup](./form-yup)
+3. [Formularios Hook](./form-hook)
+
+
+## 01/10/2024
+- Estilização de componentes e possivel data da prova **15/10/2024**
+1. [Componentes Estilização](./componentes-react/)
+
+
 
