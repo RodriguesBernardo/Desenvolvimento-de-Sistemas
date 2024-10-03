@@ -22,6 +22,7 @@
 ## 01/10/2024
 - Estilização de componentes e possivel data da prova **15/10/2024**
 1. [Componentes Estilização](./componentes-react/)
+1. [React Router](./router-react/)  [PDF](./__Atividades/Capítulo%208_%20Introdução%20ao%20React%20Router_%20Navegação%20entre%20páginas%20e%20configuração%20de%20rotas.pdf)
 
 
 
