@@ -1,42 +1,91 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Estilos globais */
+.app-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Lista de Livros */
+.book-list-container {
+  margin: 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.book-list {
+  list-style-type: none;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.book-item {
+  border: 1px solid #ddd;
+  margin: 10px 0;
+  padding: 10px;
+  text-align: left;
+  border-radius: 5px;
 }
 
-.card {
-  padding: 2em;
+.book-item h2 {
+  margin: 0 0 5px 0;
+  color: #333;
 }
 
-.read-the-docs {
-  color: #888;
+.book-item p {
+  margin: 0;
+  color: #777;
+}
+
+.add-book-button, .edit-book-button, .delete-book-button, .submit-button, .back-button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.add-book-button:hover, .edit-book-button:hover, .delete-book-button:hover, .submit-button:hover, .back-button:hover {
+  background-color: #0056b3;
+}
+
+/* Detalhes do Livro */
+.book-detail-container {
+  margin: 20px;
+}
+
+.book-detail-container h1 {
+  color: #333;
+}
+
+.book-detail-container p {
+  color: #777;
+  margin-bottom: 20px;
+}
+
+/* Formulário */
+.book-form {
+  margin: 20px auto;
+  max-width: 400px;
+  text-align: left;
+}
+
+.book-form div {
+  margin-bottom: 15px;
+}
+
+.book-form label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.book-form input, .book-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.book-form textarea {
+  height: 100px;
+  resize: none;
 }
