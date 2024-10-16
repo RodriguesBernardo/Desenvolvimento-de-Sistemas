@@ -4,12 +4,23 @@ import { Link } from 'react-router-dom';
 
 const LivroList = () => {
   const [livros, setLivros] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchLivros = () => {
+    setLoading(true);
+    axios.get('https://fakerestapi.azurewebsites.net/api/v1/Books')
+      .then(response => {
+        setLivros(response.data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Erro ao buscar livros:', error);
+        setLoading(false);
+      });
+  };
 
   useEffect(() => {
-    // Consumindo a API Fake para listar livros
-    axios.get('https://fakerestapi.azurewebsites.net/api/v1/Books')
-      .then(response => setLivros(response.data))
-      .catch(error => console.error('Erro ao buscar os livros:', error));
+    fetchLivros();
   }, []);
 
   const deleteLivro = (id) => {
@@ -29,6 +40,7 @@ const LivroList = () => {
       <Link to="/novo">
         <button>Novo Livro</button>
       </Link>
+      {loading && <p>Carregando...</p>}
       <ul className="book-list">
         {livros.map(livro => (
           <li key={livro.id} className="book-item">
