@@ -1,34 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const LivroList = () => {
-  const [livros, setLivros] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const fetchLivros = () => {
-    setLoading(true);
-    axios.get('https://fakerestapi.azurewebsites.net/api/v1/Books')
-      .then(response => {
-        setLivros(response.data);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error('Erro ao buscar livros:', error);
-        setLoading(false);
-      });
-  };
-
-  useEffect(() => {
-    fetchLivros();
-  }, []);
-
+const LivroList = ({ livros, setLivros }) => {
+  
   const deleteLivro = (id) => {
     if (window.confirm('Tem certeza que deseja excluir este livro?')) {
       axios.delete(`https://fakerestapi.azurewebsites.net/api/v1/Books/${id}`)
         .then(() => {
-          alert('Livro excluído com sucesso!');
-          setLivros(livros.filter(livro => livro.id !== id));
+          setLivros(livros.filter(livro => livro.id !== id)); // Atualiza a lista de livros localmente
         })
         .catch(error => console.error('Erro ao excluir o livro:', error));
     }
@@ -40,7 +20,6 @@ const LivroList = () => {
       <Link to="/novo">
         <button>Novo Livro</button>
       </Link>
-      {loading && <p>Carregando...</p>}
       <ul className="book-list">
         {livros.map(livro => (
           <li key={livro.id} className="book-item">
@@ -52,7 +31,7 @@ const LivroList = () => {
             <Link to={`/editar/${livro.id}`}>
               <button>Editar</button>
             </Link>
-            <button onClick={() => deleteLivro(livro.id)}>Excluir</button>
+            <button class='buttonError' onClick={() => deleteLivro(livro.id)}>Excluir</button>
           </li>
         ))}
       </ul>

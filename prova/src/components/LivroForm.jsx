@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const LivroForm = () => {
+const LivroForm = ({ setLivros }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [livro, setLivro] = useState({
@@ -14,7 +14,7 @@ const LivroForm = () => {
 
   useEffect(() => {
     if (id) {
-      // Se existir um ID, estamos editando; busca os dados do livro
+      // Se existir um ID, busca os dados do livro
       axios.get(`https://fakerestapi.azurewebsites.net/api/v1/Books/${id}`)
         .then(response => setLivro(response.data))
         .catch(error => console.error('Erro ao buscar o livro:', error));
@@ -26,7 +26,7 @@ const LivroForm = () => {
     setLivro(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Formatar a data para ISO 8601
@@ -35,7 +35,7 @@ const LivroForm = () => {
     const livroData = {
       title: livro.title,
       description: livro.description,
-      author: livro.author, // Verifique se este campo é necessário
+      author: livro.author,
       publishDate: formattedDate,
       pageCount: 0, // Defina conforme necessário
       excerpt: null // Se a API requer este campo, inclua-o
@@ -47,15 +47,22 @@ const LivroForm = () => {
 
     const method = id ? 'put' : 'post';
 
-    axios[method](apiURL, livroData)
-      .then(response => {
-        alert(`Livro ${id ? 'editado' : 'criado'} com sucesso!`);
-        navigate('/'); // Redireciona para a página inicial após sucesso
-      })
-      .catch(error => {
-        console.error('Erro ao salvar o livro:', error.response ? error.response.data : error);
-        alert('Erro ao salvar o livro. Verifique os dados e tente novamente.');
-      });
+    try {
+      const response = await axios[method](apiURL, livroData);
+      alert(`Livro ${id ? 'editado' : 'criado'} com sucesso!`);
+
+      // Atualiza a lista de livros localmente sem recarregar a página
+      if (id) {
+        setLivros(prevLivros => prevLivros.map(l => (l.id === parseInt(id) ? response.data : l)));
+      } else {
+        setLivros(prevLivros => [...prevLivros, response.data]);
+      }
+
+      navigate('/'); // Redireciona para a página inicial após sucesso
+    } catch (error) {
+      console.error('Erro ao salvar o livro:', error);
+      alert('Erro ao salvar o livro. Verifique os dados e tente novamente.');
+    }
   };
 
   return (
