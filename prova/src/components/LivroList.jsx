@@ -8,7 +8,7 @@ const LivroList = ({ livros, setLivros }) => {
     if (window.confirm('Tem certeza que deseja excluir este livro?')) {
       axios.delete(`https://fakerestapi.azurewebsites.net/api/v1/Books/${id}`)
         .then(() => {
-          setLivros(livros.filter(livro => livro.id !== id)); // Atualiza a lista de livros localmente
+          setLivros(livros.filter(livro => livro.id !== id));
         })
         .catch(error => console.error('Erro ao excluir o livro:', error));
     }

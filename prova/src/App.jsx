@@ -7,8 +7,6 @@ import axios from 'axios';
 
 function App() {
   const [livros, setLivros] = useState([]);
-
-  // Função para buscar os livros da API
   const fetchLivros = () => {
     axios.get('https://fakerestapi.azurewebsites.net/api/v1/Books')
       .then(response => setLivros(response.data))

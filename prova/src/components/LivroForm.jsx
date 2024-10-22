@@ -1,49 +1,61 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+
+const schema = yup.object().shape({
+  title: yup.string().required('O título é obrigatório'),
+  description: yup.string().required('A descrição é obrigatória'),
+  author: yup.string().required('O autor é obrigatório'),
+  publishDate: yup.date().required('A data de publicação é obrigatória')
+});
 
 const LivroForm = ({ setLivros }) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [livro, setLivro] = useState({
-    title: '',
-    description: '',
-    author: '',
-    publishDate: ''
+
+ 
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors }
+  } = useForm({
+    resolver: yupResolver(schema),
   });
 
   useEffect(() => {
     if (id) {
-      // Se existir um ID, busca os dados do livro
       axios.get(`https://fakerestapi.azurewebsites.net/api/v1/Books/${id}`)
-        .then(response => setLivro(response.data))
-        .catch(error => console.error('Erro ao buscar o livro:', error));
+        .then(response => {
+          const { title, description, author, publishDate } = response.data;
+          setValue('title', title);
+          setValue('description', description);
+          setValue('author', author);
+          setValue('publishDate', publishDate.split('T')[0]); 
+        })
+        .catch(error => {
+          console.error('Erro ao buscar o livro:', error);
+          alert('Erro ao carregar os dados do livro.');
+        });
     }
-  }, [id]);
+  }, [id, setValue]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setLivro(prevState => ({ ...prevState, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // Formatar a data para ISO 8601
-    const formattedDate = new Date(livro.publishDate).toISOString();
+  const onSubmit = async (data) => {
+    const formattedDate = new Date(data.publishDate).toISOString();
 
     const livroData = {
-      title: livro.title,
-      description: livro.description,
-      author: livro.author,
+      title: data.title,
+      description: data.description,
+      author: data.author,
       publishDate: formattedDate,
-      pageCount: 0, // Defina conforme necessário
-      excerpt: null // Se a API requer este campo, inclua-o
     };
 
     const apiURL = id
-      ? `https://fakerestapi.azurewebsites.net/api/v1/Books/${id}`  // Editar livro existente
-      : 'https://fakerestapi.azurewebsites.net/api/v1/Books';  // Criar novo livro
+      ? `https://fakerestapi.azurewebsites.net/api/v1/Books/${id}` 
+      : 'https://fakerestapi.azurewebsites.net/api/v1/Books';
 
     const method = id ? 'put' : 'post';
 
@@ -51,14 +63,17 @@ const LivroForm = ({ setLivros }) => {
       const response = await axios[method](apiURL, livroData);
       alert(`Livro ${id ? 'editado' : 'criado'} com sucesso!`);
 
-      // Atualiza a lista de livros localmente sem recarregar a página
       if (id) {
         setLivros(prevLivros => prevLivros.map(l => (l.id === parseInt(id) ? response.data : l)));
       } else {
-        setLivros(prevLivros => [...prevLivros, response.data]);
+        const newLivro = {
+          ...response.data,
+          id: response.data.id || Date.now(), 
+        };
+        setLivros(prevLivros => [...prevLivros, newLivro]);
       }
 
-      navigate('/'); // Redireciona para a página inicial após sucesso
+      navigate('/');
     } catch (error) {
       console.error('Erro ao salvar o livro:', error);
       alert('Erro ao salvar o livro. Verifique os dados e tente novamente.');
@@ -68,22 +83,26 @@ const LivroForm = ({ setLivros }) => {
   return (
     <div className="container">
       <h1>{id ? 'Editar Livro' : 'Novo Livro'}</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>Título</label>
-          <input type="text" name="title" value={livro.title} onChange={handleChange} required />
+          <input type="text" {...register('title')} />
+          {errors.title && <p className="error-message">{errors.title.message}</p>}
         </div>
         <div>
           <label>Descrição</label>
-          <textarea name="description" value={livro.description} onChange={handleChange} required />
+          <textarea {...register('description')} />
+          {errors.description && <p className="error-message">{errors.description.message}</p>}
         </div>
         <div>
           <label>Autor</label>
-          <input type="text" name="author" value={livro.author} onChange={handleChange} required />
+          <input type="text" {...register('author')} />
+          {errors.author && <p className="error-message">{errors.author.message}</p>}
         </div>
         <div>
           <label>Data de Publicação</label>
-          <input type="date" name="publishDate" value={livro.publishDate} onChange={handleChange} required />
+          <input type="date" {...register('publishDate')} />
+          {errors.publishDate && <p className="error-message">{errors.publishDate.message}</p>}
         </div>
         <button type="submit">{id ? 'Salvar Alterações' : 'Adicionar Livro'}</button>
       </form>

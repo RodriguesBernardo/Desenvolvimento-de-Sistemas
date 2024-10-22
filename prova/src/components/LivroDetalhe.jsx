@@ -7,7 +7,6 @@ const LivroDetalhes = () => {
   const [livro, setLivro] = useState(null);
 
   useEffect(() => {
-    // Consumindo a API Fake para buscar os detalhes de um livro específico
     axios.get(`https://fakerestapi.azurewebsites.net/api/v1/Books/${id}`)
       .then(response => setLivro(response.data))
       .catch(error => console.error('Erro ao buscar o livro:', error));
