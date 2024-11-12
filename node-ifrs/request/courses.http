@@ -12,7 +12,6 @@ Content-Type: application/json
 "type": "Superior"
 }
 
-### Altera um curso específico
 PUT {{baseUrl}}/courses/66e9aa36-eac0-4667-b0ba-324a4d39cdc9
 Content-Type: application/json
 {

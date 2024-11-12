@@ -5,7 +5,6 @@
 1. [Concessionaria](./concessionaria/)
 2. [My-Components](./my-components/)
 
-
 ## 03/09/2024
 - Alterando dados em my-components - Criação de um relógio atualizado em tempo real 
 
@@ -36,5 +35,5 @@
 - Atividade referente a aula [Atividade node express](./node-express/)
 
 ## 12/11/2024
-- Depois da prova seguimos com conteudos de node, esqueci de postar do dia 05/11/2025
+- Depois da prova seguimos com conteudos de node
 1. Atividade pratica: [Atividade](./node-ifrs/)
