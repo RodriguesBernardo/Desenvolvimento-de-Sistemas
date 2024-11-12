@@ -32,6 +32,9 @@
 1. Usando AXIOS [Parte 01 Axios](./axios/) 
 2. Atividade [Atividade Axios](./atividadeApiHook/)
 
+# 05/11/2025
+- Atividade referente a aula [Atividade node express](./node-express/)
 
-
-:-)
+## 12/11/2024
+- Depois da prova seguimos com conteudos de node, esqueci de postar do dia 05/11/2025
+1. Atividade pratica: [Atividade](./node-ifrs/)
