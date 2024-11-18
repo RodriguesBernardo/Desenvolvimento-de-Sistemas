@@ -37,3 +37,4 @@
 ## 12/11/2024
 - Depois da prova seguimos com conteudos de node
 1. Atividade pratica: [Atividade](./node-ifrs/)
+2. Atividade pratica: [Atividade](./node-jwd/)
