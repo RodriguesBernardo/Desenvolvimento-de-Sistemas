@@ -1,0 +1,99 @@
+.app-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    text-align: center;
+  }
+  
+.book-list-container {
+    margin: 20px;
+  }
+  
+  .book-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .book-item {
+    border: 1px solid #ddd;
+    margin: 10px 0;
+    padding: 10px;
+    text-align: left;
+    border-radius: 5px;
+  }
+  
+  .book-item h2 {
+    margin: 0 0 5px 0;
+    color: #333;
+  }
+  
+  .book-item p {
+    margin: 0;
+    color: #777;
+  }
+  
+  .add-book-button, 
+  .edit-book-button, 
+  .delete-book-button, 
+  .submit-button, 
+  .back-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .add-book-button:hover, 
+  .edit-book-button:hover, 
+  .delete-book-button:hover, 
+  .submit-button:hover, 
+  .back-button:hover {
+    background-color: #0056b3;
+  }
+  
+  
+  .book-detail-container {
+    margin: 20px;
+  }
+  
+  .book-detail-container h1 {
+    color: #333;
+  }
+  
+  .book-detail-container p {
+    color: #777;
+    margin-bottom: 20px;
+  }
+  
+  
+  .book-form {
+    margin: 20px auto;
+    max-width: 400px;
+    text-align: left;
+  }
+  
+  .book-form div {
+    margin-bottom: 15px;
+  }
+  
+  .book-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .book-form input, 
+  .book-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .book-form textarea {
+    height: 100px;
+    resize: none;
+  }
+  
